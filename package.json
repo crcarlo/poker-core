@@ -1,0 +1,14 @@
+{
+  "name": "poker-core",
+  "version": "0.0.1",
+  "description": "A Texas Hold'em utility library",
+  "main": "./src/index.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "author": "Carlo Cervellin",
+  "license": "ISC",
+  "devDependencies": {
+    "mocha": "^5.2.0"
+  }
+}
