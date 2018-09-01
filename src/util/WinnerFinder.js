@@ -1,4 +1,3 @@
-
 const verdicts = {
 	royalFlush: 0,
 	straightFlush: 1,
@@ -13,16 +12,16 @@ const verdicts = {
 };
 
 const verdictsStrings = [
-	"Royal Flush",
-	"Straight Flush",
-	"Four of a kind",
-	"Full House",
-	"Flush",
-	"Straight",
-	"Three of a kind",
-	"Two pairs",
-	"Pair",
-	"High card"
+	'Royal Flush',
+	'Straight Flush',
+	'Four of a kind',
+	'Full House',
+	'Flush',
+	'Straight',
+	'Three of a kind',
+	'Two pairs',
+	'Pair',
+	'High card'
 ];
 
 function Verdict(hand, table) {

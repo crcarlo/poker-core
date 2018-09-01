@@ -1,4 +1,4 @@
-const { Card } = require("./Card");
+const { Card } = require('./Card');
 
 function Deck() {
 	this.cards = [];
@@ -9,7 +9,10 @@ function Deck() {
 	}
 
 	this.getCard = () => {
-		return this.cards.splice(Math.floor(Math.random() * this.cards.length), 1)[0];
+		return this.cards.splice(
+			Math.floor(Math.random() * this.cards.length),
+			1
+		)[0];
 	};
 }
 
