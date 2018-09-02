@@ -97,11 +97,11 @@ function Verdict(hand, table) {
 		let sameSeedCards = cardsWith(null, i, cards);
 		if (sameSeedCards.length === 5) {
 			if (
-				cardsWith(0, i, cards).length === 1 &&
-				cardsWith(12, i, cards).length === 1 &&
-				cardsWith(11, i, cards).length === 1 &&
-				cardsWith(10, i, cards).length === 1 &&
-				cardsWith(9, i, cards).length === 1
+				cardsWith(0, i, sameSeedCards).length > 0 &&
+				cardsWith(12, i, sameSeedCards).length > 0 &&
+				cardsWith(11, i, sameSeedCards).length > 0 &&
+				cardsWith(10, i, sameSeedCards).length > 0 &&
+				cardsWith(9, i, sameSeedCards).length > 0
 			) {
 				// ROYAL FLUSH
 				this.verdict = verdicts.royalFlush;
