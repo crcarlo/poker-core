@@ -33,7 +33,7 @@ function tableFromString(tableString) {
 	} else {
 		const card1 = cardFromString(tableStringArray[0]);
 		const card2 = cardFromString(tableStringArray[1]);
-		const card2 = cardFromString(tableStringArray[2]);
+		const card3 = cardFromString(tableStringArray[2]);
 
 		return new Table(card1, card2, card3);
 	}
