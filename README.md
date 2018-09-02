@@ -1,6 +1,6 @@
 # poker-core
 
-This is a lightweight (no dependencies), reliable (has test) and easy to use (you can judge) library for finding a winner in a Texas Hold'em game with `Node.js`.
+This is a **lightweight** (no dependencies), **reliable** (has tests) and **easy to use** (you can judge) library for finding a winner in a Texas Hold'em game with `Node.js`.
 
 ## Use
 
