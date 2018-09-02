@@ -2,6 +2,26 @@ const PokerCore = require('../../src/index');
 
 module.exports = [
 	{
+		handCards: ['QD', '2C'],
+		tableCards: ['6D', '8C', '5S', 'KC', '7C'],
+		result: PokerCore.verdicts.high
+	},
+	{
+		handCards: ['10H', '5S'],
+		tableCards: ['2S', 'AC', '9D', '8D', 'JH'],
+		result: PokerCore.verdicts.high
+	},
+	{
+		handCards: ['2H', '8D'],
+		tableCards: ['6S', '5C', 'KH', 'AC', 'QD'],
+		result: PokerCore.verdicts.high
+	},
+	{
+		handCards: ['JH', '7H'],
+		tableCards: ['4C', 'AS', '5D', '9C', 'QD'],
+		result: PokerCore.verdicts.high
+	},
+	{
 		handCards: ['AD', 'AC'],
 		tableCards: ['2D', '4C', 'KH', 'QD', '10D'],
 		result: PokerCore.verdicts.pair
@@ -17,29 +37,9 @@ module.exports = [
 		result: PokerCore.verdicts.pair
 	},
 	{
-		handCards: ['2D', '2D'],
-		tableCards: ['3H', '4D', '9H', 'QH', '9D'],
-		result: PokerCore.verdicts.twoPairs
-	},
-	{
-		handCards: ['2D', '2D'],
-		tableCards: ['3H', '4D', '9H', 'QD', '9D'],
-		result: PokerCore.verdicts.flush
-	},
-	{
-		handCards: ['QD', '2C'],
-		tableCards: ['6D', '8C', '5S', 'KC', '7C'],
-		result: PokerCore.verdicts.high
-	},
-	{
-		handCards: ['2H', '8D'],
-		tableCards: ['6S', '5C', 'KH', 'AC', 'QD'],
-		result: PokerCore.verdicts.high
-	},
-	{
-		handCards: ['AS', '5D'],
-		tableCards: ['3S', 'AH', '7C', '6H', 'AD'],
-		result: PokerCore.verdicts.three
+		handCards: ['6S', '9S'],
+		tableCards: ['2H', '10H', 'QS', '3H', '2S'],
+		result: PokerCore.verdicts.pair
 	},
 	{
 		handCards: ['10S', '10C'],
@@ -57,9 +57,29 @@ module.exports = [
 		result: PokerCore.verdicts.pair
 	},
 	{
-		handCards: ['10H', '5S'],
-		tableCards: ['2S', 'AC', '9D', '8D', 'JH'],
-		result: PokerCore.verdicts.high
+		handCards: ['2D', '2D'],
+		tableCards: ['3H', '4D', '9H', 'QH', '9D'],
+		result: PokerCore.verdicts.twoPairs
+	},
+	{
+		handCards: ['KS', '10S'],
+		tableCards: ['QS', '4S', 'QC', '3D', '10C'],
+		result: PokerCore.verdicts.twoPairs
+	},
+	{
+		handCards: ['AS', '9C'],
+		tableCards: ['9H', 'AD', '5C', 'QC', 'QS'],
+		result: PokerCore.verdicts.twoPairs
+	},
+	{
+		handCards: ['AS', '5D'],
+		tableCards: ['3S', 'AH', '7C', '6H', 'AD'],
+		result: PokerCore.verdicts.three
+	},
+	{
+		handCards: ['QD', '5S'],
+		tableCards: ['2C', '5C', '6D', '8S', '5H'],
+		result: PokerCore.verdicts.three
 	},
 	{
 		handCards: ['4H', '2C'],
@@ -67,18 +87,38 @@ module.exports = [
 		result: PokerCore.verdicts.twoPairs
 	},
 	{
-		handCards: ['JH', '7H'],
-		tableCards: ['4C', 'AS', '5D', '9C', 'QD'],
-		result: PokerCore.verdicts.high
-	},
-	{
 		handCards: ['3C', '8D'],
 		tableCards: ['6D', '2C', '3H', 'AH', 'AD'],
 		result: PokerCore.verdicts.twoPairs
 	},
 	{
-		handCards: ['6S', '9S'],
-		tableCards: ['2H', '10H', 'QS', '3H', '2S'],
-		result: PokerCore.verdicts.pair
+		handCards: ['3C', '5S'],
+		tableCards: ['4S', '6C', 'JH', '7S', '8D'],
+		result: PokerCore.verdicts.straight
+	},
+	{
+		handCards: ['6C', 'AH'],
+		tableCards: ['KS', 'QC', '4S', 'JD', '10S'],
+		result: PokerCore.verdicts.straight
+	},
+	{
+		handCards: ['2D', '2D'],
+		tableCards: ['3H', '4D', '9H', 'QD', '9D'],
+		result: PokerCore.verdicts.flush
+	},
+	{
+		handCards: ['QD', 'QS'],
+		tableCards: ['3H', 'QH', '4S', '4H', '9D'],
+		result: PokerCore.verdicts.full
+	},
+	{
+		handCards: ['9C', '7D'],
+		tableCards: ['7C', '2D', '7S', 'AS', '7H'],
+		result: PokerCore.verdicts.poker
+	},
+	{
+		handCards: ['6C', 'AH'],
+		tableCards: ['KH', 'QC', 'QH', 'JH', '10H'],
+		result: PokerCore.verdicts.royalFlush
 	}
 ];
