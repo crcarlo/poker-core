@@ -22,4 +22,19 @@ function Table(card1, card2, card3) {
 	};
 }
 
-module.exports = { Table };
+function tableFromString(tableString) {
+	const trimmedTableString = tableString.trim();
+	const tableStringArray = trimmedTableString.split(' ').filter(el => el !== '');
+
+	if (tableStringArray.length !== 3) {
+		throw new Error("Invalid table string!");
+	} else {
+		const card1 = cardFromString(tableStringArray[0]);
+		const card2 = cardFromString(tableStringArray[1]);
+		const card2 = cardFromString(tableStringArray[2]);
+
+		return new Table(card1, card2, card3);
+	}
+}
+
+module.exports = { Table, tableFromString };
