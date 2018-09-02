@@ -74,7 +74,10 @@ function Verdict(hand, table) {
 	const areConsecutive = someCards => {
 		sortCardsByNumberReverse(someCards);
 		for (let i = 1; i < someCards.length; i++) {
-			if (someCards[i].number - someCards[i - 1].number !== -1) {
+			if (
+				someCards[i].number - someCards[i - 1].number !== -1 &&
+				someCards[i].number - someCards[i - 1].number !== 12
+			) {
 				return false;
 			}
 		}
