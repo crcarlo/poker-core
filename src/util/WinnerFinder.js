@@ -216,7 +216,9 @@ function Verdict(hand, table) {
 	if (twos.length === 1) {
 		// PAIR
 		this.verdict = verdicts.pair;
-		const leftCards = sortCardsByNumberReverse(cardsWithout(cards, twos[0]));
+		const leftCards = sortCardsByNumberReverse(
+			cardsWithout(cards, twos[0])
+		);
 		this.highCards = [twos[0][0], leftCards[0], leftCards[1], leftCards[2]];
 		return;
 	}
