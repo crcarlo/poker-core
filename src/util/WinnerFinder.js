@@ -36,16 +36,14 @@ function Verdict(hand, table) {
 
 	//console.log("Cards", cards);
 
+	const cardsWithNumber = (number, someCards) =>
+		someCards.filter(card => card.number === number);
+
+	const cardsWithSeed = (seed, someCards) =>
+	someCards.filter(card => card.seed === seed);
+
 	const cardsWith = (number, seed, someCards) =>
-		someCards.filter(
-			card =>
-				((number || number === 0) &&
-					seed &&
-					number === card.number &&
-					seed === card.seed) ||
-				((number || number === 0) && !seed && number === card.number) ||
-				(seed && !number && seed === card.seed)
-		);
+		cardsWithSeed(seed, cardsWithNumber(number, someCards));
 
 	const areSameSeed = someCards =>
 		!!(
@@ -94,14 +92,14 @@ function Verdict(hand, table) {
 
 	// flush
 	for (let i = 0; i < 4; i++) {
-		let sameSeedCards = cardsWith(null, i, cards);
+		let sameSeedCards = cardsWithSeed(i, cards);
 		if (sameSeedCards.length === 5) {
 			if (
-				cardsWith(0, i, sameSeedCards).length > 0 &&
-				cardsWith(12, i, sameSeedCards).length > 0 &&
-				cardsWith(11, i, sameSeedCards).length > 0 &&
-				cardsWith(10, i, sameSeedCards).length > 0 &&
-				cardsWith(9, i, sameSeedCards).length > 0
+				cardsWith(0, i, sameSeedCards).length === 1 &&
+				cardsWith(12, i, sameSeedCards).length === 1 &&
+				cardsWith(11, i, sameSeedCards).length === 1 &&
+				cardsWith(10, i, sameSeedCards).length === 1 &&
+				cardsWith(9, i, sameSeedCards).length === 1
 			) {
 				// ROYAL FLUSH
 				this.verdict = verdicts.royalFlush;
@@ -125,7 +123,7 @@ function Verdict(hand, table) {
 	const twos = [];
 	//console.log("==============================", cards);
 	for (let i = 0; i < 13; i++) {
-		let sameNumberCards = cardsWith(i, null, cards);
+		let sameNumberCards = cardsWithNumber(i, cards);
 		//console.log(">>>>>>>>>>>>>>>>>>>>>>>>>>", sameNumberCards);
 		if (sameNumberCards.length === 4) {
 			// POKER
