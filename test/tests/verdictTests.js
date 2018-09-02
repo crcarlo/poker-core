@@ -102,6 +102,11 @@ module.exports = [
 		result: PokerCore.verdicts.straight
 	},
 	{
+		handCards: ['AC', '2H'],
+		tableCards: ['QC', 'KH', 'QH', 'JH', '10H'],
+		result: PokerCore.verdicts.flush
+	},
+	{
 		handCards: ['2D', '2D'],
 		tableCards: ['3H', '4D', '9H', 'QD', '9D'],
 		result: PokerCore.verdicts.flush
