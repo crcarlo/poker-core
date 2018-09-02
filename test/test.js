@@ -51,10 +51,11 @@ describe('Match resolution', function() {
 	describe('Verdict', function() {
 		verdictTests.forEach(test => {
 			it(
-				'Should find "' +
+				'For '.concat(test.handCards) +
+					','.concat(test.tableCards) +
+					' should find "' +
 					PokerCore.verdictsStrings[test.result] +
-					'" for '.concat(test.handCards) +
-					','.concat(test.tableCards),
+					'"',
 				function() {
 					assert.equal(
 						new PokerCore.Verdict(
