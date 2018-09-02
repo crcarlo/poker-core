@@ -9,7 +9,7 @@ function handFromString(handString) {
 	const handStringArray = trimmedHandString.split(' ').filter(el => el !== '');
 
 	if (handStringArray.length !== 2) {
-		throw new Error("Invalid hand string!");
+		throw new Error('Invalid hand string!');
 	} else {
 		const card1 = cardFromString(handStringArray[0]);
 		const card2 = cardFromString(handStringArray[1]);
