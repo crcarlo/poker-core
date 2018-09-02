@@ -28,6 +28,35 @@ describe('Card', function() {
 	});
 });
 
+describe('Hand', function() {
+	describe('handFromString()', function() {
+		it('Should work', function() {
+			const hand1 = PokerCore.handFromString('AC 5D');
+			const hand2 = new PokerCore.Hand(
+				PokerCore.cardFromString('AC'),
+				PokerCore.cardFromString('5D')
+			);
+			assert.equal(hand1.cards[0].equals(hand2.cards[0]), true);
+			assert.equal(hand1.cards[1].equals(hand2.cards[1]), true);
+		});
+	});
+});
+
+describe('Table', function() {
+	describe('tableFromString()', function() {
+		it('Should work', function() {
+			const table1 = PokerCore.tableFromString('AC 5D  2C');
+			const table2 = new PokerCore.Table(
+				PokerCore.cardFromString('AC'),
+				PokerCore.cardFromString('5D'),
+				PokerCore.cardFromString('2C')
+			);
+			assert.equal(table1.cards[0].equals(table2.cards[0]), true);
+			assert.equal(table1.cards[1].equals(table2.cards[1]), true);
+		});
+	});
+});
+
 describe('Match resolution', function() {
 	describe('Verdict', function() {
 		const tests = [
