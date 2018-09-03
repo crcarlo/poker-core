@@ -1,7 +1,8 @@
 const assert = require('assert');
 const PokerCore = require('../src/index');
-const verdictTests = require('./tests/verdictTests');
 const cardsStringTests = require('./tests/cardsStringTests');
+const verdictTests = require('./tests/verdictTests');
+const gameTests = require('./tests/gameTests');
 
 describe('Card', function() {
 	describe('cardFromString()', function() {
@@ -73,6 +74,43 @@ describe('Match resolution', function() {
 						).verdict,
 						test.result
 					);
+				}
+			);
+		});
+	});
+
+	describe('bestHand()', function() {
+		function arrayEqual(a, b) {
+			if (a === b) return true;
+			if (a == null || b == null) return false;
+			if (a.length != b.length) return false;
+			for (var i = 0; i < a.length; ++i) {
+				if (a[i] !== b[i]) return false;
+			}
+			return true;
+		}
+		gameTests.forEach(test => {
+			it(
+				'For hands ' +
+					JSON.stringify(test.hands) +
+					' and table ' +
+					JSON.stringify(
+						test.table + ' ' + test.tableCards[0] + ' ' + test.tableCards[1]
+					) +
+					' should find ' +
+					JSON.stringify(test.result),
+				function() {
+					const hands = test.hands.map(handString =>
+						PokerCore.handFromString(handString)
+					);
+					const table = PokerCore.tableFromString(test.table);
+
+					table.addCard(PokerCore.cardFromString(test.tableCards[0]));
+					table.addCard(PokerCore.cardFromString(test.tableCards[1]));
+
+					const bestHand = PokerCore.bestHand(hands, table);
+
+					assert.equal(arrayEqual(bestHand, test.result), true);
 				}
 			);
 		});
