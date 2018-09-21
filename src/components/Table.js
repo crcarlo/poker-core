@@ -28,14 +28,27 @@ function tableFromString(tableString) {
 		.split(' ')
 		.filter(el => el !== '');
 
-	if (tableStringArray.length !== 3) {
-		throw new Error('Invalid table string!');
-	} else {
+	if (tableStringArray.length === 3) {
 		const card1 = cardFromString(tableStringArray[0]);
 		const card2 = cardFromString(tableStringArray[1]);
 		const card3 = cardFromString(tableStringArray[2]);
 
 		return new Table(card1, card2, card3);
+	} else if (tableStringArray.length === 5) {
+		const card1 = cardFromString(tableStringArray[0]);
+		const card2 = cardFromString(tableStringArray[1]);
+		const card3 = cardFromString(tableStringArray[2]);
+		const card4 = cardFromString(tableStringArray[3]);
+		const card5 = cardFromString(tableStringArray[4]);
+
+		const table = new Table(card1, card2, card3);
+		table.addCard(card4);
+		table.addCard(card5);
+
+		return table;
+
+	} else {
+		throw new Error('Invalid table string!');
 	}
 }
 
