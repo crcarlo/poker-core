@@ -4,7 +4,7 @@ const tests = 10;
 
 for (let i = 0; i < tests; i++) {
 	const deck = new Deck();
-	const handsNumber = 2;
+	const handsNumber = 3;
 	const hands = [];
 
 	for (let i = 0; i < handsNumber; i++) {
