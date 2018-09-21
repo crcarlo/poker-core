@@ -4,7 +4,8 @@
   "description": "A Texas Hold'em utility library",
   "main": "./src/index.js",
   "scripts": {
-    "test": "mocha"
+    "test": "mocha",
+    "nyan": "mocha --reporter nyan"
   },
   "author": "Carlo Cervellin",
   "license": "ISC",
