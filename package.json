@@ -3,6 +3,10 @@
   "version": "0.0.2",
   "description": "A Texas Hold'em utility library",
   "main": "./src/index.js",
+  "files": [
+    "src/",
+    "README.md"
+  ],
   "scripts": {
     "test": "mocha",
     "nyan": "mocha --reporter nyan"
