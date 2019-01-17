@@ -122,6 +122,11 @@ module.exports = [
 		result: PokerCore.verdicts.poker
 	},
 	{
+		handCards: ['6C', 'AS'],
+		tableCards: ['KS', 'QS', '4S', 'JS', '10S'],
+		result: PokerCore.verdicts.royalFlush
+	},
+	{
 		handCards: ['6C', 'AH'],
 		tableCards: ['KH', 'QC', 'QH', 'JH', '10H'],
 		result: PokerCore.verdicts.royalFlush
