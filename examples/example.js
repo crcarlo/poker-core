@@ -1,4 +1,4 @@
-const PokerCore = require('./src/index');
+const PokerCore = require('../src/index');
 
 const hand1 = PokerCore.handFromString('AD QC');
 const hand2 = PokerCore.handFromString('2H 3D');
