@@ -2,7 +2,17 @@
 
 This is a **lightweight** (no dependencies), **reliable** (has tests) and **easy to use** (you can judge) library for finding a winner in a Texas Hold'em game with `Node.js`.
 
-## Use
+## Installing
+
+Just run
+
+```
+npm install --save poker-core
+```
+
+## Use example
+
+Here's a simple usage example, just to introduce you to this library.
 
 ```js
 const PokerCore = require('poker-core');
