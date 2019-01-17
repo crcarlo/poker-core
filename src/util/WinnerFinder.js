@@ -119,10 +119,8 @@ function Verdict(hand, table) {
 	// multiples
 	const threes = [];
 	const twos = [];
-	//console.log("==============================", cards);
 	for (let i = 0; i < 13; i++) {
 		let sameNumberCards = cardsWithNumber(i, cards);
-		//console.log(">>>>>>>>>>>>>>>>>>>>>>>>>>", sameNumberCards);
 		if (sameNumberCards.length === 4) {
 			// POKER
 			this.verdict = verdicts.poker;
