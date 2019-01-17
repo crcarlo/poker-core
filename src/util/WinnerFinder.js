@@ -34,8 +34,6 @@ function Verdict(hand, table) {
 	const cards = hand.cards.concat(table.cards);
 	cards.sort((a, b) => a.number - b.number);
 
-	//console.log("Cards", cards);
-
 	const cardsWithNumber = (number, someCards) =>
 		someCards.filter(card => card.number === number);
 
