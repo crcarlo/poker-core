@@ -38,7 +38,7 @@ function Verdict(hand, table) {
 		someCards.filter(card => card.number === number);
 
 	const cardsWithSeed = (seed, someCards) =>
-	someCards.filter(card => card.seed === seed);
+		someCards.filter(card => card.seed === seed);
 
 	const cardsWith = (number, seed, someCards) =>
 		cardsWithSeed(seed, cardsWithNumber(number, someCards));
@@ -91,7 +91,7 @@ function Verdict(hand, table) {
 	// flush
 	for (let i = 0; i < 4; i++) {
 		let sameSeedCards = cardsWithSeed(i, cards);
-		if (sameSeedCards.length === 5) {
+		if (sameSeedCards.length >= 5) {
 			if (
 				cardsWith(0, i, sameSeedCards).length === 1 &&
 				cardsWith(12, i, sameSeedCards).length === 1 &&
