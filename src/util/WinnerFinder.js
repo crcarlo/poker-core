@@ -37,21 +37,21 @@ function Verdict(hand, table) {
 	const cardsWithNumber = (number, someCards) =>
 		someCards.filter(card => card.number === number);
 
-	const cardsWithSeed = (seed, someCards) =>
-		someCards.filter(card => card.seed === seed);
+	const cardsWithSuit = (suit, someCards) =>
+		someCards.filter(card => card.suit === suit);
 
-	const cardsWith = (number, seed, someCards) =>
-		cardsWithSeed(seed, cardsWithNumber(number, someCards));
+	const cardsWith = (number, suit, someCards) =>
+		cardsWithSuit(suit, cardsWithNumber(number, someCards));
 
-	const areSameSeed = someCards =>
+	const areSameSuit = someCards =>
 		!!(
 			someCards.reduce((acc, val) => {
-				if (val.seed === acc) {
-					return val.seed;
+				if (val.suit === acc) {
+					return val.suit;
 				} else {
 					return null;
 				}
-			}, someCards[0].seed) + 1
+			}, someCards[0].suit) + 1
 		); // +1 because might be 0
 
 	const sortCardsByNumberReverse = someCards =>
@@ -98,33 +98,33 @@ function Verdict(hand, table) {
 		someCards.filter(
 			card =>
 				!withoutCards.some(
-					c => c.seed === card.seed && c.number === card.number
+					c => c.suit === card.suit && c.number === card.number
 				)
 		);
 
 	// flush
 	for (let i = 0; i < 4; i++) {
-		let sameSeedCards = cardsWithSeed(i, cards);
-		if (sameSeedCards.length >= 5) {
+		let sameSuitCards = cardsWithSuit(i, cards);
+		if (sameSuitCards.length >= 5) {
 			if (
-				cardsWith(0, i, sameSeedCards).length === 1 &&
-				cardsWith(12, i, sameSeedCards).length === 1 &&
-				cardsWith(11, i, sameSeedCards).length === 1 &&
-				cardsWith(10, i, sameSeedCards).length === 1 &&
-				cardsWith(9, i, sameSeedCards).length === 1
+				cardsWith(0, i, sameSuitCards).length === 1 &&
+				cardsWith(12, i, sameSuitCards).length === 1 &&
+				cardsWith(11, i, sameSuitCards).length === 1 &&
+				cardsWith(10, i, sameSuitCards).length === 1 &&
+				cardsWith(9, i, sameSuitCards).length === 1
 			) {
 				// ROYAL FLUSH
 				this.verdict = verdicts.royalFlush;
 				return;
-			} else if (areFiveConsecutive(sameSeedCards)) {
+			} else if (areFiveConsecutive(sameSuitCards)) {
 				// STRAIGHT FLUSH
 				this.verdict = verdicts.straightFlush;
-				this.highCards = [sortCardsByNumberReverse(sameSeedCards)[0]];
+				this.highCards = [sortCardsByNumberReverse(sameSuitCards)[0]];
 				return;
 			} else {
 				// FLUSH
 				this.verdict = verdicts.flush;
-				this.highCards = [sortCardsByNumberReverse(sameSeedCards)];
+				this.highCards = [sortCardsByNumberReverse(sameSuitCards)];
 				return;
 			}
 		}

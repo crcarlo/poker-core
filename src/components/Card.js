@@ -1,5 +1,5 @@
 const symbols = {
-	seeds: {
+	suits: {
 		clubs: 'C',
 		diamonds: 'D',
 		hearts: 'H',
@@ -13,31 +13,31 @@ const symbols = {
 	}
 };
 
-function Card(seed, number) {
-	if (seed < 0 || seed > 3) {
-		throw new Error('Invalid seed number! Got number: ' + seed);
+function Card(suit, number) {
+	if (suit < 0 || suit > 3) {
+		throw new Error('Invalid suit number! Got number: ' + suit);
 	}
 
 	if (number < 0 || number > 12) {
 		throw new Error('Invalid number for card! Got number: ' + number);
 	}
 
-	this.seed = seed;
+	this.suit = suit;
 	this.number = number;
 
 	this.toString = () => {
-		function intToSeed(num) {
+		function intToSuit(num) {
 			if (num === 0) {
-				return symbols.seeds.clubs;
+				return symbols.suits.clubs;
 			}
 			if (num === 1) {
-				return symbols.seeds.diamonds;
+				return symbols.suits.diamonds;
 			}
 			if (num === 2) {
-				return symbols.seeds.hearts;
+				return symbols.suits.hearts;
 			}
 			if (num === 3) {
-				return symbols.seeds.spades;
+				return symbols.suits.spades;
 			}
 		}
 		function intToValue(num) {
@@ -53,31 +53,31 @@ function Card(seed, number) {
 				return num + 1;
 			}
 		}
-		return '' + intToValue(number) + intToSeed(seed);
+		return '' + intToValue(number) + intToSuit(suit);
 	};
 
 	this.equals = otherCard =>
-		otherCard.seed === this.seed && otherCard.number === this.number;
+		otherCard.suit === this.suit && otherCard.number === this.number;
 }
 
 function cardFromString(cardString) {
 	const cardStringTrimmed = cardString.trim();
 
 	var cardNumberString = '';
-	var cardSeedNumberString = '';
+	var cardSuitNumberString = '';
 
 	if (cardStringTrimmed.length === 2) {
 		cardNumberString = cardStringTrimmed[0];
-		cardSeedNumberString = cardStringTrimmed[1];
+		cardSuitNumberString = cardStringTrimmed[1];
 	} else if (cardStringTrimmed.length === 3) {
 		cardNumberString = cardStringTrimmed.substring(0, 2);
-		cardSeedNumberString = cardStringTrimmed[2];
+		cardSuitNumberString = cardStringTrimmed[2];
 	} else {
 		throw new Error('Invalid card String!');
 	}
 
 	let cardNumber = -1;
-	let cardSeedNumber = -1;
+	let cardSuitNumber = -1;
 
 	if (cardNumberString === symbols.values.ace) {
 		cardNumber = 0;
@@ -91,21 +91,21 @@ function cardFromString(cardString) {
 		cardNumber = parseInt(cardNumberString) - 1;
 	}
 
-	if (cardSeedNumberString === symbols.seeds.clubs) {
-		cardSeedNumber = 0;
-	} else if (cardSeedNumberString === symbols.seeds.diamonds) {
-		cardSeedNumber = 1;
-	} else if (cardSeedNumberString === symbols.seeds.hearts) {
-		cardSeedNumber = 2;
-	} else if (cardSeedNumberString === symbols.seeds.spades) {
-		cardSeedNumber = 3;
+	if (cardSuitNumberString === symbols.suits.clubs) {
+		cardSuitNumber = 0;
+	} else if (cardSuitNumberString === symbols.suits.diamonds) {
+		cardSuitNumber = 1;
+	} else if (cardSuitNumberString === symbols.suits.hearts) {
+		cardSuitNumber = 2;
+	} else if (cardSuitNumberString === symbols.suits.spades) {
+		cardSuitNumber = 3;
 	}
 
-	if (cardNumber === -1 || cardSeedNumber === -1) {
+	if (cardNumber === -1 || cardSuitNumber === -1) {
 		throw new Error('Invalid card String!');
 	}
 
-	return new Card(cardSeedNumber, cardNumber);
+	return new Card(cardSuitNumber, cardNumber);
 }
 
 module.exports = { Card, cardFromString };

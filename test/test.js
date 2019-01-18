@@ -10,7 +10,7 @@ describe('Card', function() {
 			it('Should work', function() {
 				assert.equal(
 					PokerCore.cardFromString(test.cardString).equals(
-						new PokerCore.Card(test.seedNumber, test.cardNumber)
+						new PokerCore.Card(test.suitNumber, test.cardNumber)
 					),
 					true
 				);
