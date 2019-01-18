@@ -43,17 +43,6 @@ function Verdict(hand, table) {
 	const cardsWith = (number, suit, someCards) =>
 		cardsWithSuit(suit, cardsWithNumber(number, someCards));
 
-	const areSameSuit = someCards =>
-		!!(
-			someCards.reduce((acc, val) => {
-				if (val.suit === acc) {
-					return val.suit;
-				} else {
-					return null;
-				}
-			}, someCards[0].suit) + 1
-		); // +1 because might be 0
-
 	const sortCardsByNumberReverse = someCards =>
 		someCards.sort((card1, card2) => {
 			let _b = card2.number;
