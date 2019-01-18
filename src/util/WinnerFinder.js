@@ -80,6 +80,20 @@ function Verdict(hand, table) {
 		return true;
 	};
 
+	const areFiveConsecutive = someCards => {
+		if (someCards.length < 5) {
+			return false;
+		}
+		sortCardsByNumberReverse(someCards);
+		for (let i = 0; i < someCards.length - 4; i++) {
+			if (areConsecutive(someCards.splice(i, 5))) {
+				return true;
+			}
+		}
+
+		return false;
+	};
+
 	const cardsWithout = (someCards, withoutCards) =>
 		someCards.filter(
 			card =>
@@ -102,7 +116,7 @@ function Verdict(hand, table) {
 				// ROYAL FLUSH
 				this.verdict = verdicts.royalFlush;
 				return;
-			} else if (areConsecutive(sameSeedCards)) {
+			} else if (areFiveConsecutive(sameSeedCards)) {
 				// STRAIGHT FLUSH
 				this.verdict = verdicts.straightFlush;
 				this.highCards = [sortCardsByNumberReverse(sameSeedCards)[0]];
