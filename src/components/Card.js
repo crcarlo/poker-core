@@ -63,8 +63,8 @@ function Card(suit, number) {
 function cardFromString(cardString) {
 	const cardStringTrimmed = cardString.trim();
 
-	var cardNumberString = '';
-	var cardSuitNumberString = '';
+	let cardNumberString = '';
+	let cardSuitNumberString = '';
 
 	if (cardStringTrimmed.length === 2) {
 		cardNumberString = cardStringTrimmed[0];
