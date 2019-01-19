@@ -22,6 +22,16 @@ module.exports = [
 		result: PokerCore.verdicts.high
 	},
 	{
+		handCards: ['QH', 'KS'],
+		tableCards: ['2S', '5C', '7S', '9H', '3S'],
+		result: PokerCore.verdicts.high
+	},
+	{
+		handCards: ['JC', '3H'],
+		tableCards: ['2C', '10S', 'AS', '7H', '9D'],
+		result: PokerCore.verdicts.high
+	},
+	{
 		handCards: ['AD', 'AC'],
 		tableCards: ['2D', '4C', 'KH', 'QD', '10D'],
 		result: PokerCore.verdicts.pair
@@ -57,6 +67,16 @@ module.exports = [
 		result: PokerCore.verdicts.pair
 	},
 	{
+		handCards: ['4C', '3H'],
+		tableCards: ['7D', 'AS', 'QS', '6H', '3D'],
+		result: PokerCore.verdicts.pair
+	},
+	{
+		handCards: ['AC', 'KC'],
+		tableCards: ['2H', '10S', '4S', 'QC', '10C'],
+		result: PokerCore.verdicts.pair
+	},
+	{
 		handCards: ['2D', '2D'],
 		tableCards: ['3H', '4D', '9H', 'QH', '9D'],
 		result: PokerCore.verdicts.twoPairs
@@ -69,6 +89,21 @@ module.exports = [
 	{
 		handCards: ['AS', '9C'],
 		tableCards: ['9H', 'AD', '5C', 'QC', 'QS'],
+		result: PokerCore.verdicts.twoPairs
+	},
+	{
+		handCards: ['KC', 'JC'],
+		tableCards: ['9D', '7C', '5H', '9S', '7S'],
+		result: PokerCore.verdicts.twoPairs
+	},
+	{
+		handCards: ['AS', '8D'],
+		tableCards: ['KH', 'KD', '3D', '4S', '3C'],
+		result: PokerCore.verdicts.twoPairs
+	},
+	{
+		handCards: ['AH', 'QC'],
+		tableCards: ['AD', '3S', '3H', '9D', 'JS'],
 		result: PokerCore.verdicts.twoPairs
 	},
 	{
@@ -102,6 +137,11 @@ module.exports = [
 		result: PokerCore.verdicts.straight
 	},
 	{
+		handCards: ['9S', '8C'],
+		tableCards: ['7S', '7D', 'JH', 'AH', '10S'],
+		result: PokerCore.verdicts.straight
+	},
+	{
 		handCards: ['AC', '2H'],
 		tableCards: ['QC', 'KH', 'QH', 'JH', '10H'],
 		result: PokerCore.verdicts.flush
@@ -114,6 +154,16 @@ module.exports = [
 	{
 		handCards: ['QD', 'QS'],
 		tableCards: ['3H', 'QH', '4S', '4H', '9D'],
+		result: PokerCore.verdicts.full
+	},
+	{
+		handCards: ['JS', '7D'],
+		tableCards: ['5C', 'AC', 'JD', 'AD', 'JC'],
+		result: PokerCore.verdicts.full
+	},
+	{
+		handCards: ['AS', '8H'],
+		tableCards: ['8C', '9H', '8D', '9D', 'AD'],
 		result: PokerCore.verdicts.full
 	},
 	{

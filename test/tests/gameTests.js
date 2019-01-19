@@ -66,6 +66,48 @@ module.exports = [
 		result: [0]
 	},
 	{
+		hands: ['AD QD', 'AH JS'],
+		table: 'AC 2S 3H',
+		tableCards: ['5S', '8S'],
+		result: [0]
+	},
+	{
+		hands: ['AH QH', 'AS JS'],
+		table: '9S 2S 3D',
+		tableCards: ['5C', '8S'],
+		result: [1]
+	},
+	{
+		hands: ['AS 7H', 'AC 7D'],
+		table: 'AD 2S 3C',
+		tableCards: ['3D', '8H'],
+		result: [0, 1]
+	},
+	{
+		hands: ['8H JC', '9S JS'],
+		table: '4C 7H 3D',
+		tableCards: ['3S', 'JD'],
+		result: [1]
+	},
+	{
+		hands: ['10S 7H', '10H 8C'],
+		table: 'AS KD JC',
+		tableCards: ['5C', '6H'],
+		result: [1]
+	},
+	{
+		hands: ['10D 2S', '10S 4S'],
+		table: 'AC KS JH',
+		tableCards: ['5C', '6D'],
+		result: [0, 1]
+	},
+	{
+		hands: ['5C 2C', '6D 4S'],
+		table: 'AC KS JH',
+		tableCards: ['10D', 'AS'],
+		result: [0, 1]
+	},
+	{
 		hands: ['AH 7D', '9C KD', '6C 3C'],
 		table: '5D AS 6H',
 		tableCards: ['2C', 'JS'],
