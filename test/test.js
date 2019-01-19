@@ -51,31 +51,30 @@ describe('Table', function() {
 describe('Match resolution', function() {
 	describe('Verdict', function() {
 		verdictTests.forEach(test => {
-			it(
-				'For '.concat(test.handCards) +
-					','.concat(test.tableCards) +
-					' should find "' +
-					PokerCore.verdictsStrings[test.result] +
-					'"',
-				function() {
-					assert.equal(
-						new PokerCore.Verdict(
-							new PokerCore.Hand(
-								PokerCore.cardFromString(test.handCards[0]),
-								PokerCore.cardFromString(test.handCards[1])
-							),
-							new PokerCore.Table(
-								PokerCore.cardFromString(test.tableCards[0]),
-								PokerCore.cardFromString(test.tableCards[1]),
-								PokerCore.cardFromString(test.tableCards[2])
+			it(`For ${test.handCards},${test.tableCards} should find "${
+				PokerCore.verdictsStrings[test.result]
+			}"`, function() {
+				assert.equal(
+					new PokerCore.Verdict(
+						new PokerCore.Hand(
+							PokerCore.cardFromString(test.handCards[0]),
+							PokerCore.cardFromString(test.handCards[1])
+						),
+						new PokerCore.Table(
+							PokerCore.cardFromString(test.tableCards[0]),
+							PokerCore.cardFromString(test.tableCards[1]),
+							PokerCore.cardFromString(test.tableCards[2])
+						)
+							.addCard(
+								PokerCore.cardFromString(test.tableCards[3])
 							)
-								.addCard(PokerCore.cardFromString(test.tableCards[3]))
-								.addCard(PokerCore.cardFromString(test.tableCards[4]))
-						).verdict,
-						test.result
-					);
-				}
-			);
+							.addCard(
+								PokerCore.cardFromString(test.tableCards[4])
+							)
+					).verdict,
+					test.result
+				);
+			});
 		});
 	});
 
@@ -90,29 +89,23 @@ describe('Match resolution', function() {
 			return true;
 		}
 		gameTests.forEach(test => {
-			it(
-				'For hands ' +
-					JSON.stringify(test.hands) +
-					' and table ' +
-					JSON.stringify(
-						test.table + ' ' + test.tableCards[0] + ' ' + test.tableCards[1]
-					) +
-					' should find ' +
-					JSON.stringify(test.result),
-				function() {
-					const hands = test.hands.map(handString =>
-						PokerCore.handFromString(handString)
-					);
-					const table = PokerCore.tableFromString(test.table);
+			it(`For hands ${JSON.stringify(test.hands)} and table ${
+				test.table
+			} ${test.tableCards[0]} ${
+				test.tableCards[1]
+			} should find ${JSON.stringify(test.result)}`, function() {
+				const hands = test.hands.map(handString =>
+					PokerCore.handFromString(handString)
+				);
+				const table = PokerCore.tableFromString(test.table);
 
-					table.addCard(PokerCore.cardFromString(test.tableCards[0]));
-					table.addCard(PokerCore.cardFromString(test.tableCards[1]));
+				table.addCard(PokerCore.cardFromString(test.tableCards[0]));
+				table.addCard(PokerCore.cardFromString(test.tableCards[1]));
 
-					const bestHand = PokerCore.bestHand(hands, table);
+				const bestHand = PokerCore.bestHand(hands, table);
 
-					assert.equal(arrayEqual(bestHand, test.result), true);
-				}
-			);
+				assert.equal(arrayEqual(bestHand, test.result), true);
+			});
 		});
 	});
 });
