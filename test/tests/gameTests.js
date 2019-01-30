@@ -166,5 +166,65 @@ module.exports = [
     table: "9H 7S KC",
     tableCards: ["6S", "2D"],
     result: [1]
+  },
+  {
+    hands: ["10D 6H", "5C 7S", "5H 2C"],
+    table: "7D 4S JC",
+    tableCards: ["3D", "2S"],
+    result: [1]
+  },
+  {
+    hands: ["6H AS", "QC 3C", "4D JD"],
+    table: "9H 9S 3S",
+    tableCards: ["6D", "2S"],
+    result: [0]
+  },
+  {
+    hands: ["9D JC", "2H AH", "8H 8S"],
+    table: "5S 4S KH",
+    tableCards: ["KC", "5D"],
+    result: [2]
+  },
+  {
+    hands: ["7D 4C", "JD 6H", "2D 10S"],
+    table: "4H 3D 5C",
+    tableCards: ["AH", "8D"],
+    result: [0]
+  },
+  {
+    hands: ["5S 9C", "6H AC", "7D QC"],
+    table: "8C 10C 2D",
+    tableCards: ["JS", "KC"],
+    result: [1]
+  },
+  {
+    hands: ["4C AS", "KS 6C", "KC 2S"],
+    table: "7D 4D 6H",
+    tableCards: ["9H", "QC"],
+    result: [1]
+  },
+  {
+    hands: ["2S KH", "AD 3S", "QC 6S"],
+    table: "4H 4S 5S",
+    tableCards: ["9D", "8D"],
+    result: [1]
+  },
+  {
+    hands: ["9C JS", "QS 5D", "3S AH"],
+    table: "KC 8H 2C",
+    tableCards: ["9H", "2H"],
+    result: [0]
+  },
+  {
+    hands: ["4C 6H", "4H 9S", "7C AS"],
+    table: "9D 6C 5H",
+    tableCards: ["10C", "3S"],
+    result: [1]
+  },
+  {
+    hands: ["8C QD", "3C KH", "3D 6H"],
+    table: "2C 4H 10D",
+    tableCards: ["7H", "AD"],
+    result: [1]
   }
 ];
