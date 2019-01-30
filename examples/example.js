@@ -1,11 +1,11 @@
-const PokerCore = require('../src/index');
+const PokerCore = require("../src/index");
 
-const hand1 = PokerCore.handFromString('AD QC');
-const hand2 = PokerCore.handFromString('2H 3D');
+const hand1 = PokerCore.handFromString("AD QC");
+const hand2 = PokerCore.handFromString("2H 3D");
 
-const table = PokerCore.tableFromString('3H KH 7D');
-table.addCard(PokerCore.cardFromString('9D'));
-table.addCard(PokerCore.cardFromString('10C'));
+const table = PokerCore.tableFromString("3H KH 7D");
+table.addCard(PokerCore.cardFromString("9D"));
+table.addCard(PokerCore.cardFromString("10C"));
 
 const verdict1 = new PokerCore.Verdict(hand1, table);
 const verdict2 = new PokerCore.Verdict(hand2, table);
@@ -24,4 +24,3 @@ const bestHand = PokerCore.bestHand([hand1, hand2], table);
 
 console.log(bestHand);
 // [ 1 ]
-

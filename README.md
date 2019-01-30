@@ -42,3 +42,7 @@ const bestHand = PokerCore.bestHand([hand1, hand2], table);
 console.log(bestHand);
 // [ 1 ]
 ```
+
+## Documentation
+
+...TODO
