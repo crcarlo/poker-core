@@ -41,13 +41,13 @@ function Card(suit, number) {
       }
     }
     function intToValue(num) {
-      if (num === 0) {
+      if (num === 1) {
         return symbols.values.ace;
-      } else if (num === 10) {
-        return symbols.values.jack;
       } else if (num === 11) {
-        return symbols.values.queen;
+        return symbols.values.jack;
       } else if (num === 12) {
+        return symbols.values.queen;
+      } else if (num === 13) {
         return symbols.values.king;
       } else {
         return num + 1;
