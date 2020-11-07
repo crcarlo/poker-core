@@ -8,7 +8,7 @@ describe("Card", function() {
   describe("cardFromString()", function() {
     cardsStringTests.forEach(test => {
       it("Should work", function() {
-        assert.equal(
+        assert.strictEqual(
           PokerCore.cardFromString(test.cardString).equals(
             new PokerCore.Card(test.suitNumber, test.cardNumber)
           ),
@@ -27,8 +27,8 @@ describe("Hand", function() {
         PokerCore.cardFromString("AC"),
         PokerCore.cardFromString("5D")
       );
-      assert.equal(hand1.cards[0].equals(hand2.cards[0]), true);
-      assert.equal(hand1.cards[1].equals(hand2.cards[1]), true);
+      assert.strictEqual(hand1.cards[0].equals(hand2.cards[0]), true);
+      assert.strictEqual(hand1.cards[1].equals(hand2.cards[1]), true);
     });
   });
 });
@@ -42,8 +42,8 @@ describe("Table", function() {
         PokerCore.cardFromString("5D"),
         PokerCore.cardFromString("2C")
       );
-      assert.equal(table1.cards[0].equals(table2.cards[0]), true);
-      assert.equal(table1.cards[1].equals(table2.cards[1]), true);
+      assert.strictEqual(table1.cards[0].equals(table2.cards[0]), true);
+      assert.strictEqual(table1.cards[1].equals(table2.cards[1]), true);
     });
   });
 });
@@ -54,7 +54,7 @@ describe("Match resolution", function() {
       it(`For ${test.handCards},${test.tableCards} should find "${
         PokerCore.verdictsStrings[test.result]
       }"`, function() {
-        assert.equal(
+        assert.strictEqual(
           new PokerCore.Verdict(
             new PokerCore.Hand(
               PokerCore.cardFromString(test.handCards[0]),
@@ -100,7 +100,7 @@ describe("Match resolution", function() {
 
         const bestHand = PokerCore.bestHand(hands, table);
 
-        assert.equal(arrayEqual(bestHand, test.result), true);
+        assert.strictEqual(arrayEqual(bestHand, test.result), true);
       });
     });
   });
