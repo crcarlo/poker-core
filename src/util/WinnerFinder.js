@@ -1,17 +1,19 @@
-const verdicts = {
-  royalFlush: 0,
-  straightFlush: 1,
-  poker: 2,
-  full: 3,
-  flush: 4,
-  straight: 5,
-  three: 6,
-  twoPairs: 7,
-  pair: 8,
-  high: 9
+const { SUITS } = require("../components/Deck");
+
+const HAND_VALUES = {
+  ROYAL_FLUSH: 0,
+  STRAIGHT_FLUSH: 1,
+  POKER: 2,
+  FULL: 3,
+  FLUSH: 4,
+  STRAIGHT: 5,
+  THREE: 6,
+  TWO_PAIRS: 7,
+  PAIR: 8,
+  HIGH: 9
 };
 
-const verdictsStrings = [
+const HAND_VALUES_STRINGS = [
   "Royal Flush",
   "Straight Flush",
   "Four of a kind",
@@ -24,10 +26,10 @@ const verdictsStrings = [
   "High card"
 ];
 
-function Verdict(hand, table) {
+function HandValue(hand, table) {
   this.toString = () => {
-    if (this.verdict) {
-      return verdictsStrings[this.verdict];
+    if (this.handValue) {
+      return HAND_VALUES_STRINGS[this.handValue];
     }
   };
 
@@ -38,7 +40,7 @@ function Verdict(hand, table) {
     someCards.filter(card => card.number === number);
 
   const cardsWithSuit = (suit, someCards) =>
-    someCards.filter(card => card.suit === suit);
+    someCards.filter(card => card.suitId === suit);
 
   const cardsWith = (number, suit, someCards) =>
     cardsWithSuit(suit, cardsWithNumber(number, someCards));
@@ -47,11 +49,11 @@ function Verdict(hand, table) {
     someCards.sort((card1, card2) => {
       let _b = card2.number;
       let _a = card1.number;
-      if (_a === 0) {
-        _a = 13;
+      if (_a === 1) {
+        _a = 14;
       }
-      if (_b === 0) {
-        _b = 13;
+      if (_b === 1) {
+        _b = 14;
       }
       return _b - _a;
     });
@@ -87,46 +89,46 @@ function Verdict(hand, table) {
     someCards.filter(
       card =>
         !withoutCards.some(
-          c => c.suit === card.suit && c.number === card.number
+          c => c.suitId === card.suitId && c.number === card.number
         )
     );
 
-  // flush
-  for (let i = 0; i < 4; i++) {
-    let sameSuitCards = cardsWithSuit(i, cards);
+  // flushes
+  for (const suit of SUITS) {
+    const sameSuitCards = cardsWithSuit(suit.id, cards);
     if (sameSuitCards.length >= 5) {
       if (
-        cardsWith(0, i, sameSuitCards).length === 1 &&
-        cardsWith(12, i, sameSuitCards).length === 1 &&
-        cardsWith(11, i, sameSuitCards).length === 1 &&
-        cardsWith(10, i, sameSuitCards).length === 1 &&
-        cardsWith(9, i, sameSuitCards).length === 1
+        cardsWith(1, suit.id, sameSuitCards).length === 1 &&
+        cardsWith(13, suit.id, sameSuitCards).length === 1 &&
+        cardsWith(12, suit.id, sameSuitCards).length === 1 &&
+        cardsWith(11, suit.id, sameSuitCards).length === 1 &&
+        cardsWith(10, suit.id, sameSuitCards).length === 1
       ) {
         // ROYAL FLUSH
-        this.verdict = verdicts.royalFlush;
+        this.handValue = HAND_VALUES.ROYAL_FLUSH;
         return;
       } else if (areFiveConsecutive(sameSuitCards)) {
         // STRAIGHT FLUSH
-        this.verdict = verdicts.straightFlush;
+        this.handValue = HAND_VALUES.STRAIGHT_FLUSH;
         this.highCards = [sortCardsByNumberReverse(sameSuitCards)[0]];
         return;
       } else {
         // FLUSH
-        this.verdict = verdicts.flush;
+        this.handValue = HAND_VALUES.FLUSH;
         this.highCards = [sortCardsByNumberReverse(sameSuitCards)];
         return;
       }
     }
   }
 
-  // multiples
+  // multiples of a kind
   const threes = [];
   const twos = [];
-  for (let i = 0; i < 13; i++) {
+  for (let i = 1; i <= 13; i++) {
     let sameNumberCards = cardsWithNumber(i, cards);
     if (sameNumberCards.length === 4) {
       // POKER
-      this.verdict = verdicts.poker;
+      this.handValue = HAND_VALUES.POKER;
       const leftCards = sortCardsByNumberReverse(
         cardsWithout(cards, sameNumberCards)
       );
@@ -139,51 +141,51 @@ function Verdict(hand, table) {
     }
   }
 
-  // reverse sort (0 (ace) counts as 13 (14))
+  // reverse sort (1 (ace) counts as 14)
   threes.sort((a, b) => {
     let _a = a[0].number;
     let _b = b[0].number;
-    if (_a === 0) {
-      _a = 13;
+    if (_a === 1) {
+      _a = 14;
     }
-    if (_b === 0) {
-      _b = 13;
+    if (_b === 1) {
+      _b = 14;
     }
     return _b - _a;
   });
   twos.sort((a, b) => {
     let _a = a[0].number;
     let _b = b[0].number;
-    if (_a === 0) {
-      _a = 13;
+    if (_a === 1) {
+      _a = 14;
     }
-    if (_b === 0) {
-      _b = 13;
+    if (_b === 1) {
+      _b = 14;
     }
     return _b - _a;
   });
 
   if (threes.length > 0 && twos.length > 0) {
     // FULL
-    this.verdict = verdicts.full;
+    this.handValue = HAND_VALUES.FULL;
     this.highCards = [threes[0][0], twos[0][0]];
     return;
   }
 
-  // check straight
+  // check STRAIGHT
   const sortedCards = sortCardsByNumberReverse(cards);
   if (areConsecutive(sortedCards.slice(0, 5))) {
-    this.verdict = verdicts.straight;
+    this.handValue = HAND_VALUES.STRAIGHT;
     this.highCards = [sortedCards[0]];
     return;
   }
   if (areConsecutive(sortedCards.slice(1, 6))) {
-    this.verdict = verdicts.straight;
+    this.handValue = HAND_VALUES.STRAIGHT;
     this.highCards = [sortedCards[1]];
     return;
   }
   if (areConsecutive(sortedCards.slice(2, 7))) {
-    this.verdict = verdicts.straight;
+    this.handValue = HAND_VALUES.STRAIGHT;
     this.highCards = [sortedCards[2]];
     return;
   }
@@ -195,7 +197,7 @@ function Verdict(hand, table) {
     const leftCards = sortCardsByNumberReverse(
       cardsWithout(cards, highestThree)
     );
-    this.verdict = verdicts.three;
+    this.handValue = HAND_VALUES.THREE;
     this.highCards = [highestThree[0], leftCards[0], leftCards[1]];
     return;
   }
@@ -208,48 +210,48 @@ function Verdict(hand, table) {
     const leftCards = sortCardsByNumberReverse(
       cardsWithout(_leftCards, highestTwo1)
     );
-    this.verdict = verdicts.twoPairs;
+    this.handValue = HAND_VALUES.TWO_PAIRS;
     this.highCards = [highestTwo[0], highestTwo1[0], leftCards[0]];
     return;
   }
 
   if (twos.length === 1) {
     // PAIR
-    this.verdict = verdicts.pair;
+    this.handValue = HAND_VALUES.PAIR;
     const leftCards = sortCardsByNumberReverse(cardsWithout(cards, twos[0]));
     this.highCards = [twos[0][0], leftCards[0], leftCards[1], leftCards[2]];
     return;
   }
 
   // HIGH CARD
-  this.verdict = verdicts.high;
+  this.handValue = HAND_VALUES.HIGH;
   this.highCards = sortCardsByNumberReverse(cards).splice(0, 5);
 }
 
 function bestHand(hands, table) {
-  const verdictsFound = hands.map((hand, index) => ({
-    verdict: new Verdict(hand, table),
+  const handValuesFound = hands.map((hand, index) => ({
+    handValue: new HandValue(hand, table),
     index
   }));
-  // sort by verdict
-  verdictsFound.sort(
-    (ver1, ver2) => ver1.verdict.verdict - ver2.verdict.verdict
+  // sort by handValue
+  handValuesFound.sort(
+    (hv1, hv2) => hv1.handValue.handValue - hv2.handValue.handValue
   );
-  const bestVerdict = verdictsFound[0].verdict;
-  const bestVerdicts = verdictsFound.filter(
-    ver => ver.verdict.verdict === bestVerdict.verdict
+  const bestHandValueByType = handValuesFound[0].handValue;
+  const bestHandValuesByType = handValuesFound.filter(
+    ver => ver.handValue.handValue === bestHandValueByType.handValue
   );
   // sort by highcards
-  bestVerdicts.sort((ver1, ver2) => {
-    for (let i = 0; i < ver1.verdict.highCards.length; i++) {
+  bestHandValuesByType.sort((hv1, hv2) => {
+    for (let i = 0; i < hv1.handValue.highCards.length; i++) {
       const numb1 =
-        ver1.verdict.highCards[i].number === 0
-          ? 13
-          : ver1.verdict.highCards[i].number;
+        hv1.handValue.highCards[i].number === 1
+          ? 14
+          : hv1.handValue.highCards[i].number;
       const numb2 =
-        ver2.verdict.highCards[i].number === 0
-          ? 13
-          : ver2.verdict.highCards[i].number;
+        hv2.handValue.highCards[i].number === 1
+          ? 14
+          : hv2.handValue.highCards[i].number;
       if (numb1 > numb2) {
         return -1;
       } else if (numb1 < numb2) {
@@ -258,24 +260,24 @@ function bestHand(hands, table) {
     }
     return 0;
   });
-  const bestVerdictOfTheBests = bestVerdicts[0].verdict;
-  const bestVerdictsEver = bestVerdicts.filter(ver => {
-    for (let i = 0; i < ver.verdict.highCards.length; i++) {
+  const bestHandValueOfTheBests = bestHandValuesByType[0].handValue;
+  const bestHandValuesEver = bestHandValuesByType.filter(ver => {
+    for (let i = 0; i < ver.handValue.highCards.length; i++) {
       if (
-        ver.verdict.highCards[i].number !==
-        bestVerdictOfTheBests.highCards[i].number
+        ver.handValue.highCards[i].number !==
+        bestHandValueOfTheBests.highCards[i].number
       ) {
         return false;
       }
     }
     return true;
   });
-  return bestVerdictsEver.map(ver => ver.index);
+  return bestHandValuesEver.map(ver => ver.index);
 }
 
 module.exports = {
-  verdicts,
-  verdictsStrings,
-  Verdict,
+  HAND_VALUES,
+  HAND_VALUES_STRINGS,
+  HandValue,
   bestHand
 };

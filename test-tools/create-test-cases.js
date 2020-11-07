@@ -27,6 +27,6 @@ for (let i = 0; i < tests; i++) {
       table.cards[3] +
       "', '" +
       table.cards[4] +
-      "'],result: PokerCore.verdicts.high}"
+      "'],result: PokerCore.HAND_VALUES.HIGH}"
   );
 }

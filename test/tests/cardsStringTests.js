@@ -1,27 +1,27 @@
 module.exports = [
   {
     cardString: " AD ",
-    suitNumber: 1,
-    cardNumber: 0
-  },
-  {
-    cardString: " 2C",
-    suitNumber: 0,
+    suitId: 1,
     cardNumber: 1
   },
   {
+    cardString: " 2C",
+    suitId: 0,
+    cardNumber: 2
+  },
+  {
     cardString: "7H ",
-    suitNumber: 2,
-    cardNumber: 6
+    suitId: 2,
+    cardNumber: 7
   },
   {
     cardString: "KD",
-    suitNumber: 1,
-    cardNumber: 12
+    suitId: 1,
+    cardNumber: 13
   },
   {
     cardString: "10D",
-    suitNumber: 1,
-    cardNumber: 9
+    suitId: 1,
+    cardNumber: 10
   }
 ];

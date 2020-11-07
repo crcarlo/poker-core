@@ -1,5 +1,12 @@
 const { Card } = require("./Card");
 
+const SUITS = [
+  { id: 0, name: "clubs", symbol: "C" },
+  { id: 1, name: "diamonds", symbol: "D" },
+  { id: 2, name: "hearts", symbol: "H" },
+  { id: 3, name: "spades", symbol: "S" }
+];
+
 function Deck() {
   this.cards = [];
   for (let i = 0; i < 4; i++) {
@@ -16,4 +23,4 @@ function Deck() {
   };
 }
 
-module.exports = { Deck };
+module.exports = { Deck, SUITS };

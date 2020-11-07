@@ -13,16 +13,16 @@ const symbols = {
   }
 };
 
-function Card(suit, number) {
-  if (suit < 0 || suit > 3) {
-    throw new Error("Invalid suit number! Got number: " + suit);
+function Card(suitId, number) {
+  if (suitId < 0 || suitId > 3) {
+    throw new Error("Invalid suitId number! Got number: " + suitId);
   }
 
-  if (number < 0 || number > 12) {
+  if (number < 1 || number > 13) {
     throw new Error("Invalid number for card! Got number: " + number);
   }
 
-  this.suit = suit;
+  this.suitId = suitId;
   this.number = number;
 
   this.toString = () => {
@@ -53,11 +53,11 @@ function Card(suit, number) {
         return num + 1;
       }
     }
-    return "" + intToValue(number) + intToSuit(suit);
+    return "" + intToValue(number) + intToSuit(suitId);
   };
 
   this.equals = otherCard =>
-    otherCard.suit === this.suit && otherCard.number === this.number;
+    otherCard.suitId === this.suitId && otherCard.number === this.number;
 }
 
 function cardFromString(cardString) {
@@ -77,35 +77,35 @@ function cardFromString(cardString) {
   }
 
   let cardNumber = -1;
-  let cardSuitNumber = -1;
+  let cardSuit = -1;
 
   if (cardNumberString === symbols.values.ace) {
-    cardNumber = 0;
+    cardNumber = 1;
   } else if (cardNumberString === symbols.values.jack) {
-    cardNumber = 10;
-  } else if (cardNumberString === symbols.values.queen) {
     cardNumber = 11;
-  } else if (cardNumberString === symbols.values.king) {
+  } else if (cardNumberString === symbols.values.queen) {
     cardNumber = 12;
+  } else if (cardNumberString === symbols.values.king) {
+    cardNumber = 13;
   } else {
-    cardNumber = parseInt(cardNumberString) - 1;
+    cardNumber = parseInt(cardNumberString);
   }
 
   if (cardSuitNumberString === symbols.suits.clubs) {
-    cardSuitNumber = 0;
+    cardSuit = 0;
   } else if (cardSuitNumberString === symbols.suits.diamonds) {
-    cardSuitNumber = 1;
+    cardSuit = 1;
   } else if (cardSuitNumberString === symbols.suits.hearts) {
-    cardSuitNumber = 2;
+    cardSuit = 2;
   } else if (cardSuitNumberString === symbols.suits.spades) {
-    cardSuitNumber = 3;
+    cardSuit = 3;
   }
 
-  if (cardNumber === -1 || cardSuitNumber === -1) {
+  if (cardNumber === -1 || cardSuit === -1) {
     throw new Error("Invalid card String!");
   }
 
-  return new Card(cardSuitNumber, cardNumber);
+  return new Card(cardSuit, cardNumber);
 }
 
 module.exports = { Card, cardFromString };

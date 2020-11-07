@@ -1,7 +1,7 @@
 const assert = require("assert");
 const PokerCore = require("../src/index");
 const cardsStringTests = require("./tests/cardsStringTests");
-const verdictTests = require("./tests/verdictTests");
+const handValueTests = require("./tests/handValueTests");
 const gameTests = require("./tests/gameTests");
 
 describe("Card", function() {
@@ -10,7 +10,7 @@ describe("Card", function() {
       it("Should work", function() {
         assert.strictEqual(
           PokerCore.cardFromString(test.cardString).equals(
-            new PokerCore.Card(test.suitNumber, test.cardNumber)
+            new PokerCore.Card(test.suitId, test.cardNumber)
           ),
           true
         );
@@ -27,8 +27,22 @@ describe("Hand", function() {
         PokerCore.cardFromString("AC"),
         PokerCore.cardFromString("5D")
       );
-      assert.strictEqual(hand1.cards[0].equals(hand2.cards[0]), true);
-      assert.strictEqual(hand1.cards[1].equals(hand2.cards[1]), true);
+      assert.deepStrictEqual(
+        hand1.cards[0].cardNumber,
+        hand2.cards[0].cardNumber
+      );
+      assert.deepStrictEqual(
+        hand1.cards[0].suitId,
+        hand2.cards[0].suitId
+      );
+      assert.deepStrictEqual(
+        hand1.cards[1].cardNumber,
+        hand2.cards[1].cardNumber
+      );
+      assert.deepStrictEqual(
+        hand1.cards[1].suitId,
+        hand2.cards[1].suitId
+      );
     });
   });
 });
@@ -42,48 +56,51 @@ describe("Table", function() {
         PokerCore.cardFromString("5D"),
         PokerCore.cardFromString("2C")
       );
-      assert.strictEqual(table1.cards[0].equals(table2.cards[0]), true);
-      assert.strictEqual(table1.cards[1].equals(table2.cards[1]), true);
+      assert.deepStrictEqual(
+        table1.cards[0].cardNumber,
+        table2.cards[0].cardNumber
+      );
+      assert.deepStrictEqual(
+        table1.cards[0].suitId,
+        table2.cards[0].suitId
+      );
+      assert.deepStrictEqual(
+        table1.cards[1].cardNumber,
+        table2.cards[1].cardNumber
+      );
+      assert.deepStrictEqual(
+        table1.cards[1].suitId,
+        table2.cards[1].suitId
+      );
     });
   });
 });
 
 describe("Match resolution", function() {
-  describe("Verdict", function() {
-    verdictTests.forEach(test => {
+  describe("HandValue", function() {
+    handValueTests.forEach(test => {
       it(`For ${test.handCards},${test.tableCards} should find "${
-        PokerCore.verdictsStrings[test.result]
+        PokerCore.HAND_VALUES_STRINGS[test.result]
       }"`, function() {
-        assert.strictEqual(
-          new PokerCore.Verdict(
-            new PokerCore.Hand(
-              PokerCore.cardFromString(test.handCards[0]),
-              PokerCore.cardFromString(test.handCards[1])
-            ),
-            new PokerCore.Table(
-              PokerCore.cardFromString(test.tableCards[0]),
-              PokerCore.cardFromString(test.tableCards[1]),
-              PokerCore.cardFromString(test.tableCards[2])
-            )
-              .addCard(PokerCore.cardFromString(test.tableCards[3]))
-              .addCard(PokerCore.cardFromString(test.tableCards[4]))
-          ).verdict,
-          test.result
+        const handValue = new PokerCore.HandValue(
+          new PokerCore.Hand(
+            PokerCore.cardFromString(test.handCards[0]),
+            PokerCore.cardFromString(test.handCards[1])
+          ),
+          new PokerCore.Table(
+            PokerCore.cardFromString(test.tableCards[0]),
+            PokerCore.cardFromString(test.tableCards[1]),
+            PokerCore.cardFromString(test.tableCards[2])
+          )
+            .addCard(PokerCore.cardFromString(test.tableCards[3]))
+            .addCard(PokerCore.cardFromString(test.tableCards[4]))
         );
+        assert.strictEqual(handValue.handValue, test.result);
       });
     });
   });
 
   describe("bestHand()", function() {
-    function arrayEqual(a, b) {
-      if (a === b) return true;
-      if (a == null || b == null) return false;
-      if (a.length != b.length) return false;
-      for (let i = 0; i < a.length; ++i) {
-        if (a[i] !== b[i]) return false;
-      }
-      return true;
-    }
     gameTests.forEach(test => {
       it(`For hands ${JSON.stringify(test.hands)} and table ${test.table} ${
         test.tableCards[0]
@@ -100,7 +117,7 @@ describe("Match resolution", function() {
 
         const bestHand = PokerCore.bestHand(hands, table);
 
-        assert.strictEqual(arrayEqual(bestHand, test.result), true);
+        assert.deepStrictEqual(bestHand, test.result);
       });
     });
   });

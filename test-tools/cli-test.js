@@ -1,4 +1,4 @@
-const { Deck, Table, Hand, Card, Verdict, bestHand } = require("../src/index");
+const { Deck, Table, Hand, Card, HandValue, bestHand } = require("../src/index");
 
 for (let i = 0; i < 100; i++) {
   const deck = new Deck();
@@ -24,9 +24,9 @@ for (let i = 0; i < 100; i++) {
     for (let j = 0; j < 2; j++) {
       console.log(hands[k].cards[j].toString());
     }
-    const verdict = new Verdict(hands[k], table);
-    console.log("VERDICT: " + verdict.toString());
-    console.log("HIGH CARDS: " + verdict.highCards);
+    const handValue = new HandValue(hands[k], table);
+    console.log("HAND VALUE: " + handValue.toString());
+    console.log("HIGH CARDS: " + handValue.highCards);
     console.log("--------------------------");
   }
 
